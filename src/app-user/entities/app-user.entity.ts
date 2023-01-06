@@ -9,7 +9,7 @@ export class AppUser {
   first_name: string;
 
   @Column({ nullable: true })
-  last_name: string;
+  surname: string;
 
   @Column({ default: true })
   is_active: boolean;
