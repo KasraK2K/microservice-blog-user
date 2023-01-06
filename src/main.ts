@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
@@ -18,6 +18,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
 
+  app.useGlobalPipes(new ValidationPipe({ transform: true })); // Force to use validation in each API
   await app
     .listen(port, '0.0.0.0')
     .then(() => logger.log(`User service is running on port ${port}`))

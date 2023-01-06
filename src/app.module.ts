@@ -11,7 +11,7 @@ import { AppUserModule } from './app-user/app-user.module';
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'test',
+      database: 'user',
       autoLoadEntities: true,
       synchronize: true
     }),
