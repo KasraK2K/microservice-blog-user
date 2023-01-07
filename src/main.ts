@@ -23,6 +23,7 @@ async function bootstrap() {
   SwaggerModule.setup('swagger', app, document);
 
   app.useGlobalPipes(new ValidationPipe({ transform: true })); // Force to use validation in each API
+
   await app
     .listen(port, '0.0.0.0')
     .then(() => logger.log(`User service is running on port ${port}`))
