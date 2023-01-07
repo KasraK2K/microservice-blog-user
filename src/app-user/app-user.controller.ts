@@ -18,14 +18,14 @@ export class AppUserController {
   }
 
   @Get()
-  @ApiResponse({ status: 201, description: 'successful.' })
+  @ApiResponse({ status: 200, description: 'successful.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   findAll() {
     return this.appUserService.findAll();
   }
 
   @Get(':id')
-  @ApiResponse({ status: 201, description: 'successful.' })
+  @ApiResponse({ status: 200, description: 'successful.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   findOne(@Param('id', ParseIntPipe) id: string) {
     return this.appUserService.findOne(+id);
