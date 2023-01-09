@@ -14,11 +14,6 @@ export class CreateAppUserDto {
   @MaxLength(100)
   surname: string;
 
-  @ApiProperty({ required: false, default: true })
-  @IsBoolean()
-  @IsOptional()
-  is_active: boolean;
-
   @ApiProperty()
   @IsEmail()
   @MaxLength(100)
@@ -28,4 +23,9 @@ export class CreateAppUserDto {
   @IsString()
   @Length(8, 100)
   password: string;
+
+  @ApiProperty({ required: false, default: true })
+  @IsBoolean()
+  @IsOptional()
+  is_active: boolean;
 }

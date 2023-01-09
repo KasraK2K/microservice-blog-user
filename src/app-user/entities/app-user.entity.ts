@@ -29,7 +29,7 @@ export class AppUser {
   @CreateDateColumn()
   created_at: Date;
 
-  @UpdateDateColumn({ nullable: true })
+  @UpdateDateColumn()
   updated_at: Date;
 
   @DeleteDateColumn({ nullable: true })

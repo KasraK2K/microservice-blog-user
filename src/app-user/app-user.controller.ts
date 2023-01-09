@@ -27,21 +27,35 @@ export class AppUserController {
   @Get(':id')
   @ApiResponse({ status: 200, description: 'successful.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  findOne(@Param('id', ParseIntPipe) id: string) {
-    return this.appUserService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.appUserService.findOne(id);
   }
 
   @Patch(':id')
   @ApiResponse({ status: 201, description: 'successfully updated.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  update(@Param('id', ParseIntPipe) id: string, @Body() updateAppUserDto: UpdateAppUserDto) {
-    return this.appUserService.update(+id, updateAppUserDto);
+  update(@Param('id', ParseIntPipe) id: number, @Body() updateAppUserDto: UpdateAppUserDto) {
+    return this.appUserService.update(id, updateAppUserDto);
+  }
+
+  @Delete('soft/:id')
+  @ApiResponse({ status: 201, description: 'successfully archived.' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  softDelete(@Param('id', ParseIntPipe) id: number) {
+    return this.appUserService.softDelete(id);
+  }
+
+  @Patch('restore/:id')
+  @ApiResponse({ status: 201, description: 'successfully restored.' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  restore(@Param('id', ParseIntPipe) id: number) {
+    return this.appUserService.restore(id);
   }
 
   @Delete(':id')
   @ApiResponse({ status: 201, description: 'successfully removed.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  remove(@Param('id', ParseIntPipe) id: string) {
-    return this.appUserService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.appUserService.remove(id);
   }
 }

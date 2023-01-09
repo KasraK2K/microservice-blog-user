@@ -32,6 +32,10 @@ export class AppUserService {
     return this.appUserRepository.softDelete(id);
   }
 
+  restore(id: number) {
+    return this.appUserRepository.restore(id);
+  }
+
   remove(id: number): Promise<DeleteResult> {
     return this.appUserRepository.delete(id);
   }
