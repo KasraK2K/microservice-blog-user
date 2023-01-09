@@ -10,7 +10,7 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
   const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter());
   app.enableVersioning({
-    defaultVersion: '1',
+    defaultVersion: process.env.DEFAULT_API_VERSION,
     type: VersioningType.URI
   });
 

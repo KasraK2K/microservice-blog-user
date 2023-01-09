@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { AppUserModule } from './app-user/app-user.module';
+import { MysqlDatabaseType } from './common/interfaces/general.interface';
 
 @Module({
   imports: [
@@ -13,18 +14,17 @@ import { AppUserModule } from './app-user/app-user.module';
           : process.env.NODE_ENV === 'production'
           ? ['.env.production', '.env']
           : ['.env.development.local', '.env'],
-
       isGlobal: true
     }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'user',
-      autoLoadEntities: true,
-      synchronize: true
+      type: process.env.DB_TYPE as MysqlDatabaseType,
+      host: process.env.DB_HOST,
+      port: +process.env.DB_PORT,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      synchronize: process.env.NODE_ENV === 'development',
+      autoLoadEntities: true
     }),
     AppUserModule
   ]
