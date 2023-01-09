@@ -13,6 +13,7 @@ import { AppUserModule } from './app-user/app-user.module';
           : process.env.NODE_ENV === 'production'
           ? ['.env.production', '.env']
           : ['.env.development.local', '.env'],
+
       isGlobal: true
     }),
     TypeOrmModule.forRoot({
