@@ -1,4 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { AppUser } from './entities/app-user.entity';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+  UseInterceptors,
+  ClassSerializerInterceptor
+} from '@nestjs/common';
 import { ApiTags, ApiResponse } from '@nestjs/swagger';
 import { AppUserService } from './app-user.service';
 import { CreateAppUserDto } from './dto/create-app-user.dto';
@@ -9,14 +21,16 @@ import { UpdateAppUserDto } from './dto/update-app-user.dto';
 export class AppUserController {
   constructor(private readonly appUserService: AppUserService) {}
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   @ApiResponse({ status: 201, description: 'successfully created.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
-  create(@Body() createAppUserDto: CreateAppUserDto) {
-    console.log({ createAppUserDto });
-    return this.appUserService.create(createAppUserDto);
+  async create(@Body() createAppUserDto: CreateAppUserDto) {
+    const newAppUser = await this.appUserService.create(createAppUserDto);
+    return new AppUser(newAppUser);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get()
   @ApiResponse({ status: 200, description: 'successful.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
@@ -24,6 +38,7 @@ export class AppUserController {
     return this.appUserService.findAll();
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get(':id')
   @ApiResponse({ status: 200, description: 'successful.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })

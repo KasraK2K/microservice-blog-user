@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity({ name: 'app_users' })
 export class AppUser {
@@ -23,6 +24,7 @@ export class AppUser {
   @Column()
   email: string;
 
+  @Exclude()
   @Column()
   password: string;
 
@@ -34,4 +36,8 @@ export class AppUser {
 
   @DeleteDateColumn({ nullable: true })
   archive_at: Date;
+
+  constructor(partial: Partial<AppUser>) {
+    Object.assign(this, partial);
+  }
 }
