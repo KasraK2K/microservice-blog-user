@@ -1,1 +1,1 @@
-export type MysqlDatabaseType = 'mysql' | 'mariadb';
+export type MysqlDatabaseType = 'mysql' | 'mariadb'
