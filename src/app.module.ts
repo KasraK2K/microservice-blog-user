@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { AppUserModule } from './app-user/app-user.module';
-import { MysqlDatabaseType } from './common/interfaces/general.interface';
+import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { DataSource } from 'typeorm'
+import { ConfigModule } from '@nestjs/config'
+import { AppUserModule } from './app-user/app-user.module'
+import { MysqlDatabaseType } from './common/interfaces/general.interface'
+import { AuthModule } from './auth/auth.module'
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { MysqlDatabaseType } from './common/interfaces/general.interface';
       synchronize: process.env.NODE_ENV === 'development',
       autoLoadEntities: true
     }),
-    AppUserModule
+    AppUserModule,
+    AuthModule
   ]
 })
 export class AppModule {
