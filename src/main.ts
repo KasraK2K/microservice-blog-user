@@ -26,7 +26,7 @@ async function bootstrap() {
 
   await app
     .listen(port, '0.0.0.0')
-    .then(() => logger.log(`User service is running on port ${port}`))
+    .then(() => logger.log(`User service version ${process.env.DEFAULT_API_VERSION} is running on port ${port}`))
     .catch((error) => logger.error(error))
 }
 bootstrap()
