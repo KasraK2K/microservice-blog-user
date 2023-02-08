@@ -25,13 +25,16 @@ export class AppUser {
   surname: string
 
   @Column({ default: true })
-  active: boolean
+  is_active: boolean
 
   @Column({ default: false })
-  blocked: boolean
+  is_blocked: boolean
 
-  @Column({ default: false })
-  superuser: boolean
+  // @Column({ default: false })
+  // is_admin: boolean
+
+  // @Column({ default: false })
+  // is_superuser: boolean
 
   @Column()
   email: string

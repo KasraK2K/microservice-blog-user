@@ -31,8 +31,8 @@ export class RolesGuard implements CanActivate {
     const user = request.user
 
     // ─── CHECK SOME CONDITIONS ───────────────────────────────────────
-    if (user.isSuperuser) return true
-    if (!user.active) throw new ForbiddenException('You account is not active')
+    // if (user.is_superuser) return true
+    if (!user.is_active) throw new ForbiddenException('You account is not active')
     if (!roles.includes(payload.role)) throw new ForbiddenException('You cant access this role')
 
     let hasPermission = false

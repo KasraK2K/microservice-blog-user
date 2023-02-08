@@ -27,5 +27,5 @@ export class CreateAppUserDto {
   @ApiProperty({ required: false, default: true })
   @IsBoolean()
   @IsOptional()
-  active: boolean
+  is_active: boolean
 }
