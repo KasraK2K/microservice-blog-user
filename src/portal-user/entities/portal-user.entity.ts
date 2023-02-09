@@ -12,9 +12,9 @@ import {
 import * as bcrypt from 'bcryptjs'
 import { PermissionName } from '../../common/enums/general.enum'
 
-@Entity({ name: 'app_users' })
+@Entity({ name: 'portal_users' })
 @Unique(['email'])
-export class AppUser {
+export class PortalUser {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -29,6 +29,9 @@ export class AppUser {
 
   @Column({ default: false })
   is_blocked: boolean
+
+  @Column({ default: false })
+  is_superuser: boolean
 
   @Column()
   email: string
