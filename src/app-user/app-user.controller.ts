@@ -44,7 +44,7 @@ export class AppUserController {
     return plainToClass(AppUser, result, { excludePrefixes: ['password'] })
   }
 
-  @Get('one')
+  @Post('one')
   @ApiResponse({ status: 200, description: 'successful.' })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   findOne(@Body() findAppUserDto: FindAppUserDto) {

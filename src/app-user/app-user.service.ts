@@ -1,5 +1,5 @@
-import { classToPlain, plainToClass } from 'class-transformer'
-import { Injectable } from '@nestjs/common'
+import { plainToClass } from 'class-transformer'
+import { ConflictException, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { DeleteResult, Repository, UpdateResult } from 'typeorm'
 import { CreateAppUserDto } from './dto/create-app-user.dto'
@@ -14,9 +14,13 @@ export class AppUserService {
     private appUserRepository: Repository<AppUser>
   ) {}
 
-  create(createAppUserDto: CreateAppUserDto): Promise<CreateAppUserDto & AppUser> {
-    const appUserInstance = plainToClass(AppUser, createAppUserDto)
-    return this.appUserRepository.save(appUserInstance)
+  async create(createAppUserDto: CreateAppUserDto): Promise<AppUser> {
+    try {
+      const appUserInstance = plainToClass(AppUser, createAppUserDto)
+      return await this.appUserRepository.save(appUserInstance)
+    } catch (error) {
+      throw new ConflictException(error.message)
+    }
   }
 
   findAll(): Promise<AppUser[]> {
@@ -31,9 +35,13 @@ export class AppUserService {
     return this.appUserRepository.findOneBy(findAppUserDto)
   }
 
-  update(id: number, updateAppUserDto: UpdateAppUserDto): Promise<UpdateResult> {
-    const appUserInstance = plainToClass(AppUser, updateAppUserDto)
-    return this.appUserRepository.update({ id }, appUserInstance)
+  async update(id: number, updateAppUserDto: UpdateAppUserDto): Promise<UpdateResult> {
+    try {
+      const appUserInstance = plainToClass(AppUser, updateAppUserDto)
+      return await this.appUserRepository.update({ id }, appUserInstance)
+    } catch (error) {
+      throw new ConflictException(error.message)
+    }
   }
 
   softDelete(id: number): Promise<UpdateResult> {

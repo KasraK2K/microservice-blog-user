@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsEmail, IsNumber, IsOptional, MaxLength } from 'class-validator'
 
-export class FindAppUserDto {
+export class FindPortalUserDto {
   @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()

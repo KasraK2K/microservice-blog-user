@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config'
 import { AppUserModule } from './app-user/app-user.module'
 import { MysqlDatabaseType } from './common/interfaces/general.interface'
 import { AuthModule } from './auth/auth.module'
+import { PortalUserModule } from './portal-user/portal-user.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { AuthModule } from './auth/auth.module'
       autoLoadEntities: true
     }),
     AppUserModule,
-    AuthModule
+    AuthModule,
+    PortalUserModule
   ]
 })
 export class AppModule {
